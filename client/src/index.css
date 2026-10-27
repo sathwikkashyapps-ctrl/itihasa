@@ -1,0 +1,473 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-bg: #FAF5EC;
+    --color-surface: #FFFFFF;
+    --color-ink: #2B2623;
+  }
+
+  .dark {
+    --color-bg: #11131E;
+    --color-surface: #181B2B;
+    --color-ink: #EDE7DC;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-ink);
+    font-family: 'Inter', system-ui, sans-serif;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, .font-serif {
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+}
+
+/* ==========================================================================
+   SKEUOMORPHIC TEXTURES & AMBIENT LIGHTING
+   ========================================================================== */
+
+/* Authentic Aged Parchment with Vignette & Paper Grain */
+.bg-parchment-texture {
+  background-color: #FAF5EC;
+  background-image: 
+    radial-gradient(ellipse at center, rgba(255,255,255,0.7) 0%, rgba(241,231,214,0.6) 70%, rgba(222,207,185,0.75) 100%),
+    radial-gradient(#2B2623 0.65px, transparent 0.65px);
+  background-size: 100% 100%, 20px 20px;
+  background-attachment: fixed;
+}
+
+.dark .bg-parchment-texture {
+  background-color: #0E1018;
+  background-image: 
+    radial-gradient(ellipse at center, rgba(24,27,43,0.8) 0%, rgba(14,16,24,0.9) 70%, rgba(8,9,14,0.95) 100%),
+    radial-gradient(#EDE7DC 0.5px, transparent 0.5px);
+  background-size: 100% 100%, 24px 24px;
+  background-attachment: fixed;
+}
+
+/* Authentic Indian Arch Mask */
+.arch-mask {
+  border-radius: 4rem 4rem 1rem 1rem;
+}
+
+.arch-mask-lg {
+  border-radius: 8rem 8rem 1.5rem 1.5rem;
+}
+
+/* ==========================================================================
+   SKEUOMORPHIC CARDS, PANELS & CASINGS
+   ========================================================================== */
+
+/* Raised Physical Archival Card with Beveled Perimeter and Multi-Drop Shadow */
+.skeuo-card {
+  background: linear-gradient(180deg, #FFFFFF 0%, #FAF6EE 100%);
+  border: 1px solid #D8C7AF;
+  box-shadow: 
+    0 1px 0 rgba(255, 255, 255, 0.9) inset,
+    0 -1px 0 rgba(198, 93, 59, 0.15) inset,
+    0 2px 4px rgba(43, 38, 35, 0.06),
+    0 8px 20px -3px rgba(43, 38, 35, 0.14),
+    0 16px 32px -6px rgba(43, 38, 35, 0.08);
+  position: relative;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dark .skeuo-card {
+  background: linear-gradient(180deg, #1C2033 0%, #141726 100%);
+  border: 1px solid #2F3550;
+  box-shadow: 
+    0 1px 0 rgba(255, 255, 255, 0.1) inset,
+    0 -1px 0 rgba(0, 0, 0, 0.6) inset,
+    0 3px 6px rgba(0, 0, 0, 0.4),
+    0 10px 24px -3px rgba(0, 0, 0, 0.6),
+    0 20px 40px -6px rgba(0, 0, 0, 0.4);
+}
+
+.skeuo-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 
+    0 1px 0 rgba(255, 255, 255, 0.95) inset,
+    0 -1px 0 rgba(198, 93, 59, 0.25) inset,
+    0 4px 8px rgba(43, 38, 35, 0.08),
+    0 14px 28px -3px rgba(43, 38, 35, 0.18),
+    0 24px 44px -6px rgba(198, 93, 59, 0.12);
+}
+
+.dark .skeuo-card:hover {
+  box-shadow: 
+    0 1px 0 rgba(255, 255, 255, 0.15) inset,
+    0 -1px 0 rgba(0, 0, 0, 0.8) inset,
+    0 4px 10px rgba(0, 0, 0, 0.5),
+    0 16px 32px -3px rgba(0, 0, 0, 0.7),
+    0 28px 48px -6px rgba(233, 162, 59, 0.15);
+}
+
+/* Carved Recessed Groove (for search bars, counter plaques, inputs) */
+.skeuo-recessed {
+  background: linear-gradient(180deg, #EDE3D0 0%, #F5ECDD 100%);
+  border: 1px solid #CDBCA4;
+  box-shadow: 
+    inset 0 3px 6px rgba(43, 38, 35, 0.18),
+    inset 0 1px 2px rgba(43, 38, 35, 0.25),
+    0 1px 0 rgba(255, 255, 255, 0.85);
+}
+
+.dark .skeuo-recessed {
+  background: linear-gradient(180deg, #0D0F17 0%, #121420 100%);
+  border: 1px solid #23283E;
+  box-shadow: 
+    inset 0 3px 8px rgba(0, 0, 0, 0.7),
+    inset 0 1px 2px rgba(0, 0, 0, 0.8),
+    0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+/* Polished Wood Header / Plaque Bar */
+.skeuo-wood-panel {
+  background: 
+    linear-gradient(180deg, rgba(255,255,255,0.08) 0%, rgba(0,0,0,0.3) 100%),
+    linear-gradient(90deg, #24140B 0%, #351F12 25%, #2B180E 50%, #3B2214 75%, #24140B 100%);
+  border-top: 1px solid rgba(255,255,255,0.2);
+  border-bottom: 2px solid #140A05;
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.6);
+}
+
+/* ==========================================================================
+   TACTILE SKEUOMORPHIC BUTTONS
+   ========================================================================== */
+
+/* Terracotta Glazed Ceramic / Clay Tactile Button */
+.skeuo-btn-terracotta {
+  background: linear-gradient(180deg, #D96E4C 0%, #C65D3B 50%, #AC4827 100%);
+  border: 1px solid #893418;
+  border-bottom: 3px solid #6E260E;
+  color: #FFFFFF;
+  text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.45);
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.45),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2),
+    0 3px 6px rgba(43, 38, 35, 0.25),
+    0 1px 2px rgba(43, 38, 35, 0.2);
+  transition: all 0.12s ease;
+  cursor: pointer;
+}
+
+.skeuo-btn-terracotta:hover {
+  background: linear-gradient(180deg, #E27B5A 0%, #CD6543 50%, #B5502E 100%);
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.6),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2),
+    0 4px 10px rgba(198, 93, 59, 0.35),
+    0 1px 2px rgba(43, 38, 35, 0.2);
+}
+
+.skeuo-btn-terracotta:active {
+  transform: translateY(2px);
+  border-bottom: 1px solid #6E260E;
+  box-shadow: 
+    inset 0 2px 5px rgba(0, 0, 0, 0.5),
+    0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Burnished Antique Brass Metallic Button */
+.skeuo-btn-brass {
+  background: linear-gradient(180deg, #F9E7BA 0%, #D4AF37 40%, #B8860B 80%, #996F07 100%);
+  border: 1px solid #755503;
+  border-bottom: 3px solid #573E02;
+  color: #231802;
+  font-weight: 700;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
+  box-shadow: 
+    inset 0 1px 1px rgba(255, 255, 255, 0.7),
+    inset 0 -1px 1px rgba(0, 0, 0, 0.3),
+    0 3px 6px rgba(0, 0, 0, 0.3);
+  transition: all 0.12s ease;
+  cursor: pointer;
+}
+
+.skeuo-btn-brass:hover {
+  background: linear-gradient(180deg, #FFF0CC 0%, #E0BD45 40%, #C49214 80%, #A5780A 100%);
+  box-shadow: 
+    inset 0 1px 1px rgba(255, 255, 255, 0.9),
+    0 4px 12px rgba(212, 175, 55, 0.45);
+}
+
+.skeuo-btn-brass:active {
+  transform: translateY(2px);
+  border-bottom: 1px solid #573E02;
+  box-shadow: 
+    inset 0 3px 6px rgba(0, 0, 0, 0.5),
+    0 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+/* Cardstock / Parchment Tactile Button (Light) */
+.skeuo-btn-paper {
+  background: linear-gradient(180deg, #FFFFFF 0%, #F5EDE0 100%);
+  border: 1px solid #D1C0A5;
+  border-bottom: 2px solid #BAA586;
+  color: #2B2623;
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 2px 4px rgba(43, 38, 35, 0.1);
+  transition: all 0.12s ease;
+}
+
+.dark .skeuo-btn-paper {
+  background: linear-gradient(180deg, #242940 0%, #181B2B 100%);
+  border: 1px solid #363C5D;
+  border-bottom: 2px solid #141725;
+  color: #EDE7DC;
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.skeuo-btn-paper:active {
+  transform: translateY(1.5px);
+  border-bottom: 1px solid #BAA586;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* ==========================================================================
+   AUTHENTIC SKEUOMORPHIC ACCENTS (WAX SEALS, RIVETS, PHOTO MOUNTS)
+   ========================================================================== */
+
+/* 3D Wax Seal Badge */
+.skeuo-wax-seal {
+  background: radial-gradient(circle at 35% 35%, #E66A45 0%, #C65D3B 55%, #8A3317 100%);
+  border: 2px solid #73270F;
+  border-radius: 9999px;
+  box-shadow: 
+    0 4px 8px rgba(138, 51, 23, 0.45),
+    0 1px 2px rgba(0, 0, 0, 0.3),
+    inset 0 2px 3px rgba(255, 255, 255, 0.45),
+    inset 0 -3px 4px rgba(0, 0, 0, 0.5);
+  position: relative;
+  text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.6);
+}
+
+/* Metallic Brass Rivet / Screw Head */
+.skeuo-rivet {
+  width: 9px;
+  height: 9px;
+  border-radius: 9999px;
+  background: radial-gradient(circle at 35% 35%, #FFF0C2 0%, #D4AF37 45%, #7D5D11 100%);
+  border: 1px solid #4D3907;
+  box-shadow: 
+    0 1px 2px rgba(0, 0, 0, 0.4),
+    inset 0 1px 1px rgba(255, 255, 255, 0.8),
+    inset 0 -1px 1px rgba(0, 0, 0, 0.5);
+  position: relative;
+}
+
+.skeuo-rivet::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 1px;
+  right: 1px;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+/* Archival Photo Corner Mounts */
+.skeuo-photo-mount {
+  position: relative;
+}
+
+.skeuo-photo-mount::before,
+.skeuo-photo-mount::after {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* Top-left brass corner */
+.skeuo-corner-tl {
+  top: -2px;
+  left: -2px;
+  border-top: 3px solid #D4AF37;
+  border-left: 3px solid #D4AF37;
+  box-shadow: -1px -1px 2px rgba(0,0,0,0.4);
+}
+
+/* Top-right brass corner */
+.skeuo-corner-tr {
+  top: -2px;
+  right: -2px;
+  border-top: 3px solid #D4AF37;
+  border-right: 3px solid #D4AF37;
+  box-shadow: 1px -1px 2px rgba(0,0,0,0.4);
+}
+
+/* Bottom-left brass corner */
+.skeuo-corner-bl {
+  bottom: -2px;
+  left: -2px;
+  border-bottom: 3px solid #D4AF37;
+  border-left: 3px solid #D4AF37;
+  box-shadow: -1px 1px 2px rgba(0,0,0,0.4);
+}
+
+/* Bottom-right brass corner */
+.skeuo-corner-br {
+  bottom: -2px;
+  right: -2px;
+  border-bottom: 3px solid #D4AF37;
+  border-right: 3px solid #D4AF37;
+  box-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+}
+
+/* Hanging Leather Bookmark Ribbon */
+.skeuo-ribbon {
+  background: linear-gradient(90deg, #A44729 0%, #C65D3B 30%, #D96E4C 50%, #C65D3B 70%, #893418 100%);
+  box-shadow: 
+    0 4px 10px rgba(0, 0, 0, 0.35),
+    inset 0 1px 1px rgba(255, 255, 255, 0.3),
+    inset 0 -1px 1px rgba(0, 0, 0, 0.4);
+  position: relative;
+}
+
+.skeuo-ribbon::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  right: 0;
+  height: 8px;
+  background: inherit;
+  clip-path: polygon(0 0, 50% 100%, 100% 0);
+}
+
+/* Rubber Ink Archival Moderation Stamps */
+.skeuo-stamp {
+  display: inline-block;
+  padding: 0.25rem 0.6rem;
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  font-size: 0.7rem;
+  border-radius: 4px;
+  transform: rotate(-3deg);
+  box-shadow: 0 0 0 1px currentColor, inset 0 0 0 1px currentColor;
+  mask-image: radial-gradient(circle, rgba(0,0,0,1) 80%, rgba(0,0,0,0.7) 100%);
+}
+
+.skeuo-stamp-approved {
+  color: #15803d;
+  border: 2px dashed #15803d;
+  background: rgba(34, 197, 94, 0.08);
+}
+
+.skeuo-stamp-pending {
+  color: #b45309;
+  border: 2px dashed #b45309;
+  background: rgba(245, 158, 11, 0.08);
+  transform: rotate(2deg);
+}
+
+.skeuo-stamp-rejected {
+  color: #b91c1c;
+  border: 2px dashed #b91c1c;
+  background: rgba(239, 68, 68, 0.08);
+  transform: rotate(-4deg);
+}
+
+/* Engraved Brass / Gilded Plaque */
+.skeuo-plaque {
+  background: linear-gradient(135deg, #FFF6DE 0%, #F5E6BF 40%, #E8CD8C 100%);
+  border: 1px solid #C49F45;
+  box-shadow: 
+    0 1px 0 rgba(255,255,255,0.9) inset,
+    0 -1px 0 rgba(117,85,3,0.3) inset,
+    0 3px 6px rgba(0,0,0,0.15),
+    0 8px 16px -2px rgba(43,38,35,0.12);
+  color: #382404;
+}
+
+.dark .skeuo-plaque {
+  background: linear-gradient(135deg, #2A2315 0%, #1F190B 50%, #151105 100%);
+  border: 1px solid #755503;
+  box-shadow: 
+    0 1px 0 rgba(255,255,255,0.15) inset,
+    0 -1px 0 rgba(0,0,0,0.8) inset,
+    0 3px 8px rgba(0,0,0,0.6);
+  color: #F3E5AB;
+}
+
+/* ==========================================================================
+   TYPOGRAPHY & LETTERPRESS EFFECTS
+   ========================================================================== */
+
+/* Engraved / Letterpress Text Effect */
+.skeuo-letterpress {
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8), 0 -1px 1px rgba(0, 0, 0, 0.15);
+}
+
+.dark .skeuo-letterpress {
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.9), 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Gold Foil Stamped Text */
+.skeuo-gold-foil {
+  background: linear-gradient(135deg, #FFF1C5 0%, #D4AF37 40%, #B8860B 75%, #F5DE98 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.4));
+}
+
+/* Custom warm scrollbar */
+::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+
+::-webkit-scrollbar-track {
+  background: #E8DCC9;
+  box-shadow: inset 0 0 4px rgba(43, 38, 35, 0.2);
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #0E1018;
+  box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.7);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #D96E4C 0%, #AC4827 100%);
+  border: 1px solid #752912;
+  border-radius: 4px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #E27B5A 0%, #B5502E 100%);
+}
+
+/* Leaflet map styles fix */
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+  border-radius: 0.75rem;
+  z-index: 10;
+  font-family: 'Inter', sans-serif !important;
+}
+
+/* Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

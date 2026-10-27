@@ -1,0 +1,117 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Site {
+  id                 String      @id @default(uuid())
+  slug               String      @unique
+  name               String
+  category           String      // temple, fort, monument, museum, natural, intangible
+  shortDescription   String
+  history            String      // Rich text / markdown
+  significance       String
+  architecture       String
+  era                String      // Ancient, Medieval, Colonial, Modern
+  yearBuilt          String
+  district           String
+  state              String      @default("India")
+  latitude           Float
+  longitude          Float
+  conservationStatus String      @default("Good") // Excellent, Good, Needs Attention, Endangered
+  isProtected        Boolean     @default(true)
+  visitingHours      String
+  entryFee           String
+  bestSeason         String
+  coverImage         String
+  views              Int         @default(0)
+  createdAt          DateTime    @default(now())
+  updatedAt          DateTime    @updatedAt
+
+  images             SiteImage[]
+  events             Event[]
+
+  @@index([category])
+  @@index([district])
+  @@index([era])
+}
+
+model SiteImage {
+  id        String   @id @default(uuid())
+  siteId    String
+  url       String
+  caption   String?
+  credit    String?
+  createdAt DateTime @default(now())
+
+  site      Site     @relation(fields: [siteId], references: [id], onDelete: Cascade)
+
+  @@index([siteId])
+}
+
+model Event {
+  id          String   @id @default(uuid())
+  slug        String   @unique
+  title       String
+  type        String   // festival, ritual, fair, performance, exhibition
+  startDate   DateTime
+  endDate     DateTime
+  siteId      String?
+  description String
+  traditions  String
+  coverImage  String
+  location    String?  // Display location if not linked to site
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  site        Site?    @relation(fields: [siteId], references: [id], onDelete: SetNull)
+
+  @@index([type])
+  @@index([startDate])
+}
+
+model Story {
+  id         String   @id @default(uuid())
+  slug       String   @unique
+  title      String
+  body       String
+  authorName String
+  coverImage String
+  audioUrl   String?
+  tags       String   // Comma separated tags
+  status     String   @default("published") // published, draft
+  readTime   String   @default("5 min read")
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([status])
+}
+
+model Submission {
+  id             String   @id @default(uuid())
+  type           String   // site, event, story, photo
+  payload        String   // JSON stringified form data
+  submitterName  String
+  submitterEmail String
+  status         String   @default("pending") // pending, approved, rejected
+  notes          String?  // Admin review notes
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@index([status])
+  @@index([type])
+}
+
+model User {
+  id           String   @id @default(uuid())
+  email        String   @unique
+  passwordHash String
+  name         String   @default("Heritage Administrator")
+  role         String   @default("admin")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
